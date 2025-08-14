@@ -1,0 +1,85 @@
+Introduction 
+
+- Introduction to enumeration
+    - The goal of enumeration is gather additional and more specific about the hosts on a network and the services running
+    - Account names, shares, missconfigured services...
+
+- Importing nmap scan results into msf 
+    - service postgresql start
+    - msfconsole
+    - db_status to check connection
+    - workspace -a <name>
+    - db_import <scan_results> 
+    - host to display hostnames and addresses
+    - sevices to display services for ecery host
+    - db_nmap <options> <target> to run nmap and import it directly to the workspace
+    - vulns displays vulnerabilities
+
+- Port scanning with auxiliary modules (LAB)
+    - part 1    
+        - search portscan
+        - use <name>
+        - show options
+        - set RHOSTS <ip>
+        - run
+        - search <web_app_name>
+        - exploit
+    - meterpreter
+        - shell
+        - /bin/bash -i
+        - run autoroute -s <ip>
+        - background
+        - sessions   
+    - setg <variable> to set global variable in metasploit 
+    - loot
+    - creds
+
+- FTP enumeration
+    - FTP: file transfer protocol
+    - TCP port 21
+    - Used frequently to transfer files between a directory to a web server
+    - search type:auxiliary name:ftp 
+    - ftp <ip> 
+    - version, shares, users, anonymous login...
+
+- SMB enumeration
+    - Network sharing protocol over LAN networks
+    - TCP port 445
+    - SAMBA is the Linux implementation of SMB
+    - search type:auxiliary name:smb 
+    - smbclient -L \\\\<ip>\\ -U <user>
+    - smbclient \\\\<ip>\\<share_name> -U <user> 
+    - rpcclient -U "" -N <ip>
+    - nmblookup -A demo.ine.local
+    - version, shares, users, anonymous login...
+
+- WEB server enumeration
+    - Web servers use HTTP/S
+    - TCP port 80,443
+    - search type:auxiliary name:http
+    - version, headers, robots.txt, directories, files, users
+
+- MySQL enumeration
+    - Open source relational database
+    - TCP port 3306
+    - search type:auxiliary name:mysql
+    - version, credentials (brute force), accounts, mysql_sql, mysql_schema
+    - SQLs
+        - show databases;
+        - use <database>;
+        - show tables;
+    - mysql -h <ip> -u <user> -p
+
+- SSH enumeration
+    - Remote administration protocol, typically used to access servers and systems
+    - TCP port 22
+    - search type:auxiliary name:ssh
+    - version, credentials (brute force), users
+
+- SMTP enumeration
+    - Simple ,mail transfer protocol
+    - TCP port 25 or 465 or 587
+    - search type:auxiliary name:stmp
+    - version, users, 
+    - nc <ip> <port>
+        - VRFY <name>@<domain>

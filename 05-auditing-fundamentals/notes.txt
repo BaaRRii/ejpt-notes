@@ -1,0 +1,127 @@
+Introduction to security auditing
+
+- Overview of security auditing
+    - Systematic process of evaluating the security measures of an organization
+    - Identifying vulnerabilites and weaknesses
+    - Ensuring compliance
+        - GDPR. HIPAA, PCI DSS, ISO 27001
+    - Enhancing risk management
+    - Improving security policies and procedures
+    - Supporting business objectives
+    - Continuous improvement
+
+- Essential terminology
+    - Security policies: formal documents that define an organization's security objectives, guidelines and procedures
+    - Compliance: adherence to regulatory requirements, industry standards and internal policies
+    - Vulnerability: weakness in a system or process that can be exploited to gain unauthorized access
+    - Control: a safeguard, countermeasure implemented to mitigate risks and protect assets
+    - Risk assesmnent: process of identifying, analyzing and evaluating risks to an organizations's assets 
+    - Audit trail: chronological record of events and activities that provides evidence of actions taken
+    - Compliance audit: examination of an organization's adherence to regulatory requirements and standards
+    - Access control: measures and mechanisms used to regulate access to specific info or systems
+    - Audit report: formal document that presents the findings, conclusion and recommendations
+
+- Security auditing process/lifecycle
+    - Planning and preparation
+        - Define objectives and scope, goals
+        - Gather relevant documentation
+    - Information gathering
+        - Review policies and procedures
+        - Conduct interviews
+        - Technical information
+    - Risk assesmnent
+        - List assests and threats
+        - Evaluate vulnerabilites
+        - Determine risk levels
+    - Audit execution
+        - Perform technical testing (pentest)
+        - Verify compliance
+        - Evaluate controls
+    - Analysis and evaluation
+        - Analyze findings
+        - Compare against standards
+        - Prioritize issues
+    - Reporting 
+        - Document findings, provide recommendations, present results
+    - Remediation
+        - Develop remediation plans, implement changes 
+        - Conduct follow-ups, monitor and update
+
+- Types of security audits
+    - Internal audits
+        - Evaluate internal controls and compliance with policies, self-assesmnent, 
+    - External audits
+        - Performed by a third party to provide an unbiased evaluation, serve as benchmark
+    - Compliance audits
+        - GDPR, HIPAA, PCI DSS
+    - Technical audits:
+        - IT infraestructure, hardware, software, networks
+    - Network audits
+        - Router, switches, firewalls
+    - Application audits
+        - Evaluate the security of software applications, code quality, input validation, auth mechanisms, data handling
+    
+- Security auditing and penetration testing
+    - Security Audit
+        - Purpose: Evaluate an organization's overall security posture, it focuses on the effectiveness of security controls, processes and practices
+        - Scope: Comprehensive, coverting various aspects suchs as policies, procedures...
+        - Methodology: reviewing documentation, conducting interviews, technical assesments, evaluating compliance
+        - Outcome: identifies gaps in security policies, procedures and controls. Provides recommendations for ensuring compliance
+        - Frequency: regular basis
+    - Penetration testing
+        - Purpose: simulate real-world attacks to identify and exploit vulnerabilites, focuses in technical weaknesses
+        - Scope: specific systems or networks
+        - Methodology: Involves using various tools and techniques to brach systems 
+        - Outcome: Detailed assesments of vulnerabilites and potential attack vectors
+        - Frequency: Performed as needed
+    - Sequential approach:
+        - Security audit first
+        - Penetration testing afterwards
+    - Combined approach:
+        - Integrate both.
+        - Provides a more complete picture of the organization's security in a single engagement
+    
+Governance, risk and compliance
+
+- GRC 
+    - It is a framework used to maintain transparency, accountability and resilience
+    - Governance: policies, procedures and practices that ensures an org achieves its objectives. manges its risks and complies with legal requirements
+        - Policy Development: creating clear, comprehensive security policies
+        - Roles and responsibilites
+        - Accountability: accountability mechanisms for security performance
+    - Risk: indentify, assess and mitigate risks 
+    - Compliance: ensures that an org adheres to relevant laws, regulations and standards
+
+- Common standards, frameworks and guidelines
+    - Frameworks:
+        - NIST Cybersecurity Framework
+        - COBIT (Control Objectives for information and related technologies)
+    - Standards
+        - ISO/IEC 27001
+        - PCI Data Security Standard (PCI DSS)
+        - HIPAA
+        - GDPR (General Data Protection Regulation)
+    - Guidelines
+        - CIS (Center for Internet Security controls)
+        - NIST SP 800-53 (Security controls for federal information systems)
+
+From auditing to pentesting
+    
+- Phase 1 - Develop a Security Policy
+    - Establish objectives
+    - Requirements gathering (examples)
+        - Audit and accountability: logging requirements and log review procedures
+        - Configuration management: software update practices...
+        - Identification and authorization: password policies, user ids
+        - System and information protection
+        - Maintenance and tools
+    - Extract controls from control catalog spreadsheet 
+
+- Phase 2 - Security audit with Lynis
+    - Lynis identifies vulnerabilites and remediates the findings based on the security policy
+    - ./lynis audit system
+
+- Phase 3 - Conduct Penetration Test
+    - Objective: validate effectiveness of remediation actions
+    - Compare initial audit results with the penetration test
+    - Reporting: executive summary, methodology, findings, recommendations

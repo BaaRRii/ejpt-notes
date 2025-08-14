@@ -1,0 +1,154 @@
+Introduction
+
+- Active information gathering
+    - Tasks:
+        - Network mapping
+        - Host discovery
+        - Port scanning
+        - Service detection & OS 
+        - Detection
+    - Refers to the phase of the assesment where the tester actively interacts with the target system
+    - It may involve direct interaction with network services
+
+Networking Primer
+
+- Networking fundamentals
+    - Host communicate with each other using network protocols
+    - Communication is facilitated using network packets
+        - Packets have a Header and a Payload
+        - The header has a protocol-specific strcuture
+        - The payload is the actual information (data) being sent
+    - The OSI model has 7 layers:
+        - Physical, data link, network, transport, session, presentation, application
+
+- Network layer
+    - The primary goal is to determine the optimal path for data to travel from source to destination
+    - IP protocol
+        - IPv4: 32 bits addresses
+        - IPv6: 128 bits addresses
+    - ICMP protocol: used for error reporting and diagnostics
+    - Fragmentation and reassembly
+    - Unicast, multicast, anycast
+    - Subnetting: divide large networks into smaller, more manageable ones 
+    - DHCP is used with IP to dynamically assign IP addresses
+    - Headers of an IP packet:
+        - IP source
+        - IP destination
+        - TTL 
+        - Type of service: priority of the packet
+        - Protocol 
+        - Version 
+        - Header length 
+        - Total length
+        - Identification used for reassembly
+        - Flags
+    
+- Transport layer
+    - Ensures reliable end-to-end communication (error detection, flow control, segmentation)
+    - TCP (connection oriented) and UDP (connectionless)
+    - Transmission Control Protocol:
+        - TCP ensures that data sent from one application on a device is received accurately and in order
+        - Before any data is sent there is connection (handshake) SYN, SYN + ACK, ACK
+        - Guarantees reliable delivery with mechanisms like ACKs and retransmissions of lost or corrupted packets
+    - TCP Header Fields:
+        - Source port
+        - Destination port 
+        - Sequence number
+        - ACK number
+        - Window size
+        - Checksum
+    - UDP is faster but not reliable
+    - UDP is used for real-time applications lke streaming, online gaming, VoIP
+
+Host Discovery 
+
+- Network mapping
+    - The objective is to develop a picture of the network architecture and the systems that make up the network as a whole
+    - Discovery of live hosts: determining IPs in use
+    - Identification of open ports and services
+    - Network topology mapping: creating a map or diagram of the network topology
+    - Operating system fingerprinting
+    - Service version detection
+    - Identifying filtering and security measures
+
+- Host discovery techniques
+    - Phase to identify live hosts before further exploration and exploitation
+    - Ping sweeps: ICMP Echo requests
+    - ARP scanning: address resolution protocol
+    - TCP SYN Ping (Half open scan) (stealthy): send TCP SYN to a host in a specific port and if the host is alive it responds with TCP SYN-ACK
+    - UDP ping
+    - TCP ACK ping: sending ACK packets to a specific port to see if the host sends a registered
+    - SYN ACK ping: if the host sends TCP RST is received it indicates that the host is alive
+
+ - Ping sweeps
+    - The basic idea is to send a series of ICMP Echo request messages to a range of IP addresses and observe the response
+    - Send TYPE 8 CODE 0 ICMP packets, if TYPE 0 CODE 0 received host is alive
+    - The absence of a response doesnt necessarily mean that the host is offline (firewall, congestion, temporaly unavailable)
+    - fping -a -g 10.10.48.0/24 2>/dev/null     to ping sweep
+
+- Host discovery with nmap
+    - nmap <scanoptions> <target>
+    - Sudo or root privileges might be needed 
+    - Help: nmap -h
+    - Use file of targets: nmap -sn -iL <file> 
+    - ICMP ping no port scan: nmap -sn <target>
+    - TCP SYN ping: nmap -sn -PS <target>
+    - TCP SYN ping to specific port: nmap -sn -PS<port> <target>
+    - TCP ACK ping: nmap -sn -PA <target>
+    - ICMP only: nmap -sn -PE <target>
+    - Methodology:
+        1. Ping scan: nmap -sn -v -T4 <target>
+        2. SYN ping scan: nmap -sn -PS21,22,25,80,445,3389,8080 -v -T4 <target>
+        3. If windows: nmap -sn -PS21,22,25,80,445,3389,8080 -PU137,138 -v -T4 <target>
+
+- Port scanning with nmap
+    - If nmap is ran with root privileges it will start a SYN port scan
+    - If no port is specified nmap will run a port scan on the 1000 most common ports
+    - Skip host discovery: nmap -Pn <target>
+    - Scan 100 most common ports: nmap -Pn -F <target>
+    - Limit port scan: nmap -Pn -p <port_list> <target>
+    - Scan all ports: nmap -Pn -T4 -p- <target>
+    - Stealth scan: nmap -Pn -sS -F <target>
+    - TCP connect scan: nmap -Pn -sT <target>
+    - UDP port scan: nmap -sU <target>
+
+- Service version and OS detection:
+    - nmap -T4 -sS -sV -p- <target>      -> -sV gives information about service running on each open port
+    - nmap -T4 -sS -sV --version-intensity 8 -p- <target>      -> --version-intensity does the service detection more aggresively
+    - nmap -T4 -sS -sV -O -p- <target>   -> -O provides operating system detection
+    - nmap -T4 -sS -sV -O  --osscan-guess -p- <target>   -> --osscan-guess does the operating system detection more aggresively 
+    - Operating system detection is not always 100% accurate
+i
+- Nmap Scripting Engine
+    - ls -al /usr/share/nmap/scripts to see all scripts
+    - Scritps are written in LUA
+    - nmap -T4 -sS -sV -sC -O -p- <target>    -> Default scripts 
+    - nmap --script-help=<name>
+    - nmap -sS -sV --script-=<name> -p- -T4    -> Run script
+    - There are different categories of scritps: default, safe, discovery...
+    - nmap -sS -A -T4 <target>   -> does everything (OS, version, default scripts)
+
+Evasion, scan performance and output
+
+- Firewall detection and IDS Evasion
+    - nmap ACK scan: nmap -Pn -sA <target>
+    - Fragment packets: nmap -Pn -sS -f <target>
+    - Decoy: nmap -Pn -sS -f --data-length 200 -D <decoys> <target>
+
+- Optimizing nmap scans 
+    - Timing templates range from 0 to 5. 
+    - T0: paranoid
+    - T1: sneaky
+    - T2: polite
+    - T3: default
+    - T4: aggresive 
+    - T5: insane
+    - --scan-delay: specifies the duration between each packet being sent
+    - --host-timeout: give up on target after this duration
+
+- Nmap output formats 
+    - -oN <file>: to save the terminal output to a file
+    - -oX <file>: to save in XML format (useful for metasploit)
+    - -oG <file>: grepable format
+    - -v: verbosity
+    - --reason: displays reasons a port is in a particular state

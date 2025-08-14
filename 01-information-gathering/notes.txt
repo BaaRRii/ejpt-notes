@@ -1,0 +1,90 @@
+Introduction to information gathering (recon)
+
+- Passive: involves gathering information without actively engaging with the target
+    - IP addresses
+    - DNS information
+    - Domain names and ownership 
+    - Email addresses and media profiles
+    - Web technologies
+    - Subdomains
+- Active: involves gathering information by actively engaging with the target system (needs authorization)
+    - Open ports
+    - Internal infrastructure
+    - Enumerating information
+
+
+Passive information gathering
+
+- Website Recon & Footprinting
+    - We can use command "host" to obtain the IP address of a domain
+    - Look for robots.txt (specifies what pages can be indexed by search engines), it may give info about web technologies
+    - Look for sitemap_index.xml 
+    - Extension BuiltWith (technology profiler)
+    - Extension Wappalyzer (detects technologies in websites)
+    - Utility whatweb to see technologies and versions (sometimes)
+    - Tool htttrack (website copier)
+
+- Whois enumeration
+    - Tool used to query databases that store the registered users or assignees of an Internet resource
+    - Useful to gather names, emails, name servers, etc.
+
+- Website Footprinting with Netcraft
+    - Name servers, IP addresses
+    - SSL / TLS certificate information
+    - Web trackers active on the site 
+    - Site technology profiler
+
+- DNS recon
+    - dnsrecon is a python tool used to perform a general enumeration of a domain
+    - dnsdumpser.com performs a lookup of DNS records of a domain
+
+- WAF detection with wafw00f
+    - wafw00f sends a normal HTTP request and analyses the respone to identify a number of WAF solutions
+
+- Subdomain enumeration with Sublist3r
+    - Sublist3r makes requests to many search engines and outputs different subdomains, there is an option to bruteforce
+
+- Google Dorks
+    - site:domain.com to limit results to a specific domain
+    - inurl:term to search for a specific term in the url
+    - intitle:term to search for a specific term in the title
+    - site:*.domain.com to list subdomains
+    - filetype:pdf to look for pdf files
+    - https://www.exploit-db.com/google-hacking-database
+
+- Email harvesting with theHarvester
+    - Example: theHarvester -d ine.com -b bing,brave,yahoo,bing,duckduckgo,urlscan,crtsh,intelx,otx,rapiddns,whoisxml,tomba
+
+- Leaked Password databases
+    - Useful to get email addresses
+    - haveibeenpwned.com
+
+
+Active Information gathering
+
+- DNS Zone Transfers
+    - DNS resolves names / hostnames to IP addresses
+        - A: IPv4
+        - AAAA: IPv6
+        - NS: domains nameserver
+        - MX: resolves to a mail server
+        - CNAME: aliases
+        - TXT: text record
+        - HINFO: host information
+        - SOA: domain authority
+        - SRV: service records
+        - PTR: IP to hostname
+    - DNS interrogation is the process of enumerating DNS records
+    - Zone Transfer: when DNS server admins may want to copy or transfer zone files to another server
+    - dnsenum can enumerate records that are not publicly available
+    - dig axfr @nsztm1.digi.ninja zonetransfer.me
+
+- Host discovery with nmap
+    - Network mapper
+    - netdiscover can also be used
+    - nmap -sn 192.168.0.1/24
+
+- Port scanning with nmap
+    - nmap -Pn -F -sV -O -sC 192.142.164.3
+    
+
