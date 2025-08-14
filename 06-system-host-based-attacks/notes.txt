@@ -64,5 +64,19 @@ Windows Vulnerabilities
         - Access granted <--
     - PsExec is a telnet replacement that allows to execute processes on remote windows systems
     - PsExec uses SMB authentication
-    -   
-    
+
+- Exploiting Windows MS17-010 SMB Vulnerability (EternalBlue)
+    - EternalBlue is the name given to a collection of Windows vulnerabilites and exploits to perform RCEs and gain access to Windows systems
+    - Developed by NSA
+    - Vulnerabilities affect windows versions form Vista to 10
+    - Can be exploited using MSF modules or manually with public code
+    - AutoBlue (different scripts for different windows versions)
+
+- Exploiting RDP
+    - Remote Desktop Protocol (TCPP port 3389)
+    - Typical bruteforce attacks
+    - RDP can be configured to run on any TCP port
+    - RDP_scanner is an auxiliary MSF module to check for RDP
+    - Hydra can be used to bruteforce credentials
+    - xfreerdp is a client to connect via rdp
+        - xfreerdp /u:administrator /p:qwertyuiop /v:10.2.20.34:3333
