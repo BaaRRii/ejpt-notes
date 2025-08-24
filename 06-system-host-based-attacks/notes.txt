@@ -154,3 +154,54 @@ Windows filesystem vulnerabilites
     - notepad test.txt:secret.txt
     - type payload.exe > legitimate.txt:malicious.exe
     - start legitimate.txt:malicious.exe
+
+Windows Credential Dumping
+
+- Windows Password Hashes
+    - Windows stores hashed user account passwords locally in the SAM database
+    - Two types of hashes   
+        - LM 
+        - NTLM (used after Windows Visa)
+    - The SAM database file cannot be copied while the OS is running
+    - In modern versions of Windows, the SAM database is encrypted with a syskey
+    - LM is the default hashing algorithm prior to NT4.0
+        1. The password is broken into two seven-character chunks
+        2. All characters are then converted into uppercase
+        3. Each chunk is then hashed separately with the DES algorithm 
+    - NTLM is a collection of authentication protocols
+    - NTLM is improves LM: 
+        - Does not split the hash
+        - Is case sensitive
+        - Allows the use of symbols and unicode characters
+        - Uses MD4
+
+- Searching for passwords in Windows configuration files
+    - Unattended Windows Setup utility is often used to automate the mass installation of Windows on systems
+    - This tool uses configuration files that contain account credentials
+    - These files are often left on the target after installation
+        - C:\Windows\Panther\Unattend.xml
+        - C:\Windows\Panther\Autounattend.xml
+    - Credentials might be stored in base64
+    
+- Dumping hashes with Mimikatz
+    - Mimikatz is a post-exploitation tool for the extraction of clear-text passwords, hashes and Kerberos tickets
+    - Mimikatz can be used to extract hashes from the lsass.exe process
+    - Meterpreter has an inbuilt extension called Kiwi
+    - It needs elevated privileges
+    - MSF   
+        - load kiwi 
+        - creds_all
+        - lsa_dump_sam
+        - lsa_dump_secrets
+        - upload /usr/share/windows-resources/mimikatz/x64/mimikatz.exe
+    - mimikatz.exe
+        - privilege::debug
+        - lsadump::sam
+        - lsadump::secrets
+        - sekurlsa::logonpasswords
+
+- Pass-The-Hash Attacks
+    - Technique that involves capturing NTLM or clear-text passwords and using them to authenticate with the target
+    - Psexec, crackmapexec are tools that can facilitate pass-the-hash
+        - SMBPass can be the LM:NTLM hash
+    - crackmapexec smb <ip> -u Administrator -H "<NTLM>" -x "<command>"
