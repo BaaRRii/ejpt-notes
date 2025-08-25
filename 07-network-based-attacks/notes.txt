@@ -1,0 +1,71 @@
+Introduction
+
+- Course Introduction
+    - Host Discovery & Port scanning
+    - Service enumeration
+    - MITM & Network based attacks
+    - Exploitation & Post-exploitation
+
+- Networking fundamentals
+    - Host communicate with each other using network protocols
+    - Communication is facilitated using network packets
+        - Packets have a Header and a Payload
+        - The header has a protocol-specific strcuture
+        - The payload is the actual information (data) being sent
+    - The OSI model has 7 layers:
+        - Physical, data link, network, transport, session, presentation, application
+
+- Firewall detection and IDS Evasion
+    - nmap ACK scan: nmap -Pn -sA <target>
+    - Fragment packets: nmap -Pn -sS -f <target>
+    - Decoy: nmap -Pn -sS -f --data-length 200 -D <decoys> <target>
+
+Network attacks
+
+- Network enumeration
+    - After host discovery and port scanning --> service enumeration
+    - Information about hosts/systems, account names, shares, misconfigured services, etc
+
+- SMB & NetBios Enumeration 
+    - They are two different technologies but they are related in the context of networking and file sharing
+    - NetBios (Network basic input/output system) API
+        - NetBIOS-NS: name service, allows computers to register, unregister and resolve names in a local network. 137
+        - NetBIOS-DGM: datagram service, connectionless communication and broadcast. 138
+        - NetBIOS-SSN: session service, connection oriented communication. 139
+    - SMB (Server message block)
+        - Allows computers on a netwok to share files
+        - TCP port 445 or TCP port 139 (using NetBIOS-SSN)
+    - Tools:
+        - nbtscan
+        - nmblookup -A <ip>
+        - proxychains nmap demo1.ine.local -sT -Pn -sV -p 445
+
+- SNMP enumeration
+    - Simple Network Management Protocol
+    - Monitor and managing networked devices such as routers, switches, printers...
+    - Typically uses UDP port 161 (queries) or 162 (notifications)
+        - SNMP Manager
+        - SNMP Agent
+        - Management Information base
+    - It allows to gather information useful for identifying potential vulnerabilities, misconfigurations or points of attack
+        - Identify SNMP enabled devices
+        - Extract system information
+        - Identify SNMP community strings
+        - Network configurations: routing tables, network interfaces...
+        - User and group information
+        - Identify Services and Applications
+    - Tools:
+        - snmpwalk -v 1 -c <community>
+
+- SMB relay attack
+    - An attacker intercepts SMB traffic, manipulates it and relays it to a legitimate server
+    - Phases:
+        1. Interception: arp spoofing, dns poisoning, rogue SMB server
+        2. Capturing Authentication: NTLM hashes
+        3. Relay to legitimate server
+        4. Gain access
+    - arpspoof -i eth1 -t 172.16.5.1 172.16.5.5
+    - dnsspoof -i eth1 -f dns
+    - use exploit/windows/smb/smb_relay
+
+
