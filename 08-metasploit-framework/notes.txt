@@ -1,0 +1,59 @@
+Metasploit Framework Overview
+
+- Introduction to the Metasploit Framework
+    - Open source, penetration testing and exploitation framework 
+    - Provides infraestructure for automation
+    - Terminology
+        - Interface: methods of interacting with msf
+        - Module: piece of code that performs a particular task
+        - Exploit: piece of code or module used to take advantage of a vulnerability
+        - Paylaod: piece of code delivered to the targer system by an exploit
+        - Listener: utility that listens for an incoming connection from a target
+    - Interfaces:
+        - msfconsole
+        - msfcli
+        - Metasploit community edition
+        - Armitage
+
+- Metasploit Framework architecture
+    - MSF modules:  
+        - Exploit: a module that is used to take advantage of a vulnerability, typically paired with a payload
+        - Payload: code that is delivered by MSF and remotely executed on the target
+        - Encoder: used to avoid AV detection
+        - NOPS: Used to ensure payload sizes are consistent
+        - Auxiliary: module used yo perform additional functionality like port scanning and enumeration
+    - MSF payload types:
+        - Non staged payload: sent to the target as is 
+        - Staged payload: sento to the target in two parts (stager + stage)
+            - Stagers: used to establish a stable communication channel between attacker and target
+            - Stage: payload components downloaded by the stager
+        - Meterpreter payload: executed in memory, it communicates over a stager socket and provides an attacker with a command interpreter
+        - MSF file system:
+            - Modules: /usr/share/metasploit-framework/modules
+            - User Modules: ~/.ms4/modules
+
+- Penetration testing with the Metasploit Framework
+    - PTES: Penetration Testing Execution Standard
+        - Information gathering
+        - Enumeration
+        - Exploitation
+        - Post-Exploitation
+            - Privilege Escalation
+            - Persistence 
+            - Clearing tracks
+
+Metasploit fundamentals
+
+- Installing and configuring The Metasploit Framework
+    - MSFDB: postgresql service is required
+
+- MSFConsole fundamentals
+    - MSF modules might require variables like the target IP and port to run successfully
+    - show <exploits/modules/payloads...>
+    - set payload windows/meterpreter/reverse_tcp
+    - search
+
+- Creating and managing workspaces
+    - Workspaces allow to keep track of all the hosts, scans and activities 
+    - workspace -a <name>
+    - workspace <name>
