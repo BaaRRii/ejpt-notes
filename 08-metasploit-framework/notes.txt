@@ -389,3 +389,64 @@ Windows Post Exploitation
     - run autoroute -s 10.2.18.0/20
     - Port forwarding in meterpreter
         - portfwd add -l <LOCAL PORT> -p <REMOTE PORT> -r <REMOTE IP>
+
+Linux Post Exploitation
+
+- Linux Post Exploitation Modules
+    - Enumerate system configuration, env variables, network configuration, VM, user history
+    - Modules:
+        - post/linux/gather/enum_configs
+        - post/multi/gather/env
+        - post/linux/gather/enum_network
+        - post/linux/gather/enum_protections
+        - post/linux/gather/enum_system
+        - post/linux/gather/checkcontainer
+        - post/linux/gather/checkvm
+        - post/linux/gather/enum_users_history
+        - post/multi/manage/system_session
+        - post/linux/manage/download_exec
+    - Linux commands:
+        - whoami
+        - groups root
+        - cat /etc/passwd
+        - cat /etc/*issue
+        - uname -a 
+        - ip a s
+        - netstat -antp
+        - ps aux
+        - env
+        - history
+
+- Linux Privilege Escalation: Exploiting a vulnerable program
+    - The privilege escalation techniques we can utilize will depend on the version of the linux kernel as well as the distribuiton release
+    - chrootkit privilege escalation
+
+- Dumping hashes with hashdump
+    - Linux password hashes are stored in /etc/shadow file and can be only accessed by the root user
+    - Hashed passwords can be cracked using John or other tools
+    - hashdump
+
+- Establishing persistance on Linux
+    - Persistance consists of techniques that attackers use to keep acces to systems across restarts, changed credentials, etc
+    - The persistance techiniques will depend on the target configuration
+    - Backdoor user
+        - useradd -m ftp -s /bin/bash
+        - passwd ftp password123
+        - usermod -aG root ftp
+        - usermod -u 15 ftp
+    - Cronjob
+    - SSH key 
+    - Service
+    - search platform:linux persistence
+
+Metasploit GUIs
+
+- Port Scanning and Enumeration with Armitage
+    - Armitage is a free java-based frontend for metasploit
+    - Visualizes Targets
+    - Automate port scanning 
+    - Automate exploitation
+    - Automate post exploitation
+
+- Exploitation and Post Exploitation with armitage
+    - Exploitation and post-exploitation modules 
