@@ -1,0 +1,34 @@
+
+Social Engineering
+
+- Introduction to Social Engineering
+    - Is a technique used to manipulate individuals to gain unauthorized access to sensitive systems
+    - It exploits human psychology and trust
+    - Social Engineering aim to bypass technical controls by targeting the weakest link in the security chain: the human element
+    - Exploitable traits:
+        - Desire to be helpful
+        - Tendency to trust people
+        - Desire for approval
+        - The fear of getting into trouble
+        - Avoiding conflict or trouble
+    - Social media allows attackers to contact anyone in the world with ease
+    - Social media has led to the rise of employees exposing a lot of private information that can be used by attackers
+    - Phising phases:
+        - Planning and reconnaissance
+        - Message crafting 
+        - Delivery
+        - Deception & manipulation
+
+- Pretexting
+    - Creating a false pretext or scenario to gain the trust of targets (narrative)
+    - False pretense: fictional story. Impersonation, someone with authority
+    - Establishing Trust: traget's language, tone and behavior, etc
+    - Manipulating Emotions
+    - Information gathering: once trust is established  
+    - Maintaining consistency
+    - Examples:
+        - Tech support scam
+        - Job interview scam
+        - Emergency situation
+    - https://github.com/L4bF0x/PhishingPretexts
+
