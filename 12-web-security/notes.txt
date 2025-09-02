@@ -1,0 +1,85 @@
+Introduction to Web App Security Testing
+
+- Introduction to Web Application Security 
+    - Web applications are software programs that urn on web servers, accesible over the internet through web browsers
+    - Client-serever architecture:
+        - Application's logic and data are hosted on a web server 
+        - Users acces it using web browsers (clients)
+    - UI is usually presented through acombination of HTML, CSS and JS
+    - HTTP is the protocol used in web applications. It is stateless 
+    - The primary objective of web app security is to ensure the confidentiality, integrity and availability of data
+    - Practices:
+        - Authentication and authorization
+        - Input validation
+        - Secure communication
+        - Secure coding practices
+        - Regular security updates
+        - Least privilege principle
+        - Web Application Firewalls (WAF)
+        - Session management
+
+- Web application Security Testing
+    - Process of evaluating and assesing the security aspects of web apps to identify vulnerabilities, weaknesses and potential security risks
+    - The goal is to uncover flaws before attackers can exploit them through:
+        - Vulnerability scanning
+        - Penetration Testing
+        - Code review and static analysis
+        - Authentication and authorization Testing
+        - Input validation and output encoding Testing
+        - Session management testing
+        - API security testing
+        - Web app security pentesting
+
+- Common web application threats & risks
+    - Threat: potential source of harm or adverse event that may exploit a Vulnerability
+    - Risk: potential for a loss or harm resulting from a threat exploiting a vulnerability in a system
+    - List:
+        - Cross-site scripting (XSS)
+        - SQL Injection (SQLi)
+        - Cross-site request forgery (CSRF)
+        - Security missconfigurations
+        - Sensitive data exposure
+        - Brute-Force and credential stuffing attacks
+        - File upload 
+        - Denial-of-service
+        - Server-Side Request forgery (SSRF)
+        - Inadequate access controls
+        - Using components with known vulnerabilities
+        - Broken access control
+
+Web Application Architecture & Components
+
+- Web Application architecture
+    - Client-server model
+    - Components:  
+        - UI
+        - Client side technologies
+        - Server side technologies
+        - Databases
+        - Application Logic
+        - Web Servers
+        - Application Servers
+    - Client-side processing is dangerous because anyone can modify it
+    - Server-side processing refers to the backend, where the data logic is present
+    - When a user interacts with the app, a HTTP request is sent to the server and receives an HTTP response
+
+- Web Application technologies
+    - Client
+        - HTML
+        - CSS
+        - JS
+        - Cookies and Local Storage
+    - Server
+        - Web server
+        - Application server
+        - Database server
+    - Data interchange involves the conversion of data from one format to another
+    - APIs allow different software systems to interact and exchange data
+        - JSON
+        - XML
+        - REST
+        - SOAP
+    - Security technologies:
+        - Auth mecahnisms
+        - Encryption (SSL/TLS)
+        - WAF

